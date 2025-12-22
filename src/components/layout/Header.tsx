@@ -1,16 +1,14 @@
-import React from 'react';
 import { Link, useNavigate } from '@tanstack/react-router';
 // Предполагаем, что у тебя есть хук авторизации (или создай заглушку)
-import { useAuth, useLoginUser } from '../../features/authApi'; 
+import { useAuth } from '../../features/authApi'; 
 
 export const Header = () => {
   const { user, logout } = useAuth();
-  const isPatient = user?.user_role === 'patient';
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
-    navigate({ to: '/login' });
+    navigate({ to: '/auth/login' });
   };
 
   return (
@@ -25,21 +23,21 @@ export const Header = () => {
         {user && (
           <nav className="hidden md:flex gap-6 text-gray-700 font-medium">
             <Link 
-              to="/profile/receptions" 
+              to="/profile/arranged-reception/dashboard" 
               className="hover:text-blue-600 transition-colors"
               activeProps={{ className: 'text-blue-600' }}
             >
               Мої записи
             </Link>
             <Link 
-              to="/profile/recipes" 
+              to="/profile/recipe" 
               className="hover:text-blue-600 transition-colors"
               activeProps={{ className: 'text-blue-600' }}
             >
-              Мої рецепти
+              Рецепти
             </Link>
             <Link 
-              to="/profile/analyses" 
+              to="/" 
               className="hover:text-blue-600 transition-colors"
               activeProps={{ className: 'text-blue-600' }}
             >
@@ -53,7 +51,7 @@ export const Header = () => {
           {user ? (
             <div className="flex items-center gap-3">
               <span className="text-sm text-gray-600 hidden sm:block font-medium">
-                {user.username}
+                {user.login}
               </span>
               <button 
                 onClick={handleLogout}
@@ -64,7 +62,7 @@ export const Header = () => {
             </div>
           ) : (
             <Link 
-              to="/login" 
+              to="/auth/login" 
               className="px-6 py-2 bg-blue-600 text-white rounded-md font-medium hover:bg-blue-700 transition shadow-sm"
             >
               Увійти

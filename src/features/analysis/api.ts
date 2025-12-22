@@ -73,7 +73,7 @@ export const useCreateAnalysis = () => {
       // Обновляем списки
       queryClient.invalidateQueries({ queryKey: ['analyses'] });
       // Можно перенаправить на список или детальную страницу
-        navigate({ to: '/analysis/analysis' });
+        navigate({ to: '/' });
     },
     onError: (error) => {
         console.error("Failed to create analysis:", error);
