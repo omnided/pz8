@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
 import apiClient from "../../lib/axios"; 
 import { 
   DispenseListItem, 
@@ -79,7 +78,7 @@ export const useDispense = (id: number) => {
 // Хук создания выдачи
 export const useCreateDispense = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   return useMutation({
     mutationFn: createDispense,

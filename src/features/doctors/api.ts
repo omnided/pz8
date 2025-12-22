@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
 import apiClient from "../../lib/axios"; // Подставь свой путь к axios
 import { Doctor, CreateDoctorRequest, UpdateDoctorRequest } from "./types"; 
 
@@ -58,7 +57,7 @@ export const useDoctor = (id: number) => {
 // Хук создания
 export const useCreateDoctor = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   return useMutation({
     mutationFn: createDoctor,
@@ -66,7 +65,7 @@ export const useCreateDoctor = () => {
       // Инвалидируем список, чтобы он обновился
       queryClient.invalidateQueries({ queryKey: ['doctors'] });
       // Переходим обратно к списку
-      navigate({ to: '/doctors/doctors' }); 
+    //  navigate({ to: '/doctors/doctors' }); 
     },
     onError: (error) => {
         console.error("Failed to create doctor:", error);
@@ -78,7 +77,7 @@ export const useCreateDoctor = () => {
 // Хук обновления
 export const useUpdateDoctor = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   return useMutation({
     mutationFn: updateDoctor,
@@ -89,7 +88,7 @@ export const useUpdateDoctor = () => {
       // 2. Обновляем кеш конкретного доктора (чтобы не делать лишний запрос getById, если мы на его странице)
       queryClient.setQueryData(['doctors', updatedDoctor.id], updatedDoctor);
       
-      navigate({ to: '/doctors/doctors' });
+      // navigate({ to: '/doctors/doctors' });
     },
     onError: (error) => {
         console.error("Failed to update doctor:", error);

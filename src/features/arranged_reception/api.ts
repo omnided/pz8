@@ -1,5 +1,4 @@
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useNavigate } from '@tanstack/react-router';
 import apiClient from "../../lib/axios"; 
 import { ArrangedReception, CreateReceptionRequest } from "./types";
 
@@ -104,7 +103,7 @@ export const useReception = (id: number) => {
 // Создание записи
 export const useCreateReception = () => {
   const queryClient = useQueryClient();
-  const navigate = useNavigate();
+ // const navigate = useNavigate();
 
   return useMutation({
     mutationFn: createReception,

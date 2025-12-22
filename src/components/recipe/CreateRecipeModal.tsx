@@ -19,7 +19,7 @@ export const CreateRecipeModal: React.FC<Props> = ({ receptionId, isOpen, onClos
   const { mutate: createRecipe, isPending } = useCreateRecipe();
   const { data: medicinesList, isLoading: isLoadingMeds } = useMedicinesList();
 
-  const { register, control, handleSubmit, formState: { errors } } = useForm<FormValues>({
+  const { register, control, handleSubmit, formState: {} } = useForm<FormValues>({
     defaultValues: {
       frequency: '2 рази на день',
       duration: 5,

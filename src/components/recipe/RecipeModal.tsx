@@ -19,13 +19,13 @@ export const RecipeModal: React.FC<Props> = ({ recipe, isOpen, onClose }) => {
   
   if (!isOpen || !recipe) return null;
 
-  const isPharmacist = user?.user_role === 'pharmacist';
+  const isPharmacist = user?.role === 'pharmacist';
   const canDispense = isPharmacist && recipe.status === 'очікує видачі';
 
   // 2. Новый обработчик клика
   const handleDispenseClick = () => {
     // Проверка на наличие пользователя/логина
-    if (!user?.user_login) { 
+    if (!user?.login) { 
       alert("Помилка: Не вдалося визначити логін фармацевта.");
       return;
     }
@@ -33,7 +33,7 @@ export const RecipeModal: React.FC<Props> = ({ recipe, isOpen, onClose }) => {
     if (confirm(`Видати ліки за рецептом #${recipe.id}?`)) {
       dispense({
         recipeId: recipe.id,
-        pharmacistLogin: user.user_login // Передаем логин из стора
+        pharmacistLogin: user.login // Передаем логин из стора
       }, {
         onSuccess: () => {
           alert('Ліки успішно видано!');

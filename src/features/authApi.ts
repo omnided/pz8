@@ -21,7 +21,7 @@ export const useLoginUser = () => {
 
     return useMutation({
         mutationFn: loginUser,
-        onSuccess: (data) => {
+        onSuccess: () => {
             console.log("Login successful");
             // После логина редиректим на главную или в дашборд
         },
