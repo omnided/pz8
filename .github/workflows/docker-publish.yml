@@ -1,0 +1,53 @@
+name: Build and Publish Docker Image
+
+# 1. Налаштування тригерів
+on:
+  # Тригер за ручним викликом
+  workflow_dispatch:
+  # Тригер за пушем коміту
+  push:
+    branches:
+      - main
+      - 'feature/*'
+
+# Налаштування прав доступу (необхідно для завантаження в GHCR)
+permissions:
+  contents: read
+  packages: write
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    
+    steps:
+      # Крок 1: Клонування репозиторію
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Крок 2: Встановлення pnpm та збірка (в одному скрипті)
+      - name: Install pnpm, dependencies and build
+        run: |
+          npm install -g pnpm
+          pnpm install
+          pnpm run build
+
+      # Крок 3: Авторизація в GitHub Container Registry
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          # Використання github context для отримання імені користувача (actor - той, хто запустив воркфлоу)
+          username: ${{ github.actor }}
+          # Використання вбудованого токена
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      # Крок 4: Збірка та завантаження Докер-образу
+      # Примітка: Цей екшн потребує наявності Dockerfile у корені репозиторію
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          # Формування тегу: ghcr.io / логін / репозиторій
+          # ${{ github.repository }} автоматично повертає рядок у форматі "власник/ім'я_репо"
+          tags: ghcr.io/${{ github.repository }}:latest
