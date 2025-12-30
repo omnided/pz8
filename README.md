@@ -81,3 +81,7 @@ jobs:
           context: .
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
+```
+### 2.3 Перевірка результатів
+Після успішного виконання GitHub Action, Docker-образ з'явився у вкладці Packages профілю.
+![](img/изображение_2025-12-30_093126562.png)
