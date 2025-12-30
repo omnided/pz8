@@ -5,9 +5,9 @@
 У ході виконання лабораторної роботи було пройдено навчальні курси на платформі GitHub Skills. Нижче наведено посилання на створені репозиторії з виконаними завданнями:
 
 - **Hello GitHub Actions:**
-  - [Посилання на репозиторій hello-github-actions](https://github.com/omnided/hello-github-actions)
+  - [Посилання на репозиторій hello-github-actions](https://github.com/omnided/skills-hello-github-actions)
 - **Publish Packages:**
-  - [Посилання на репозиторій publish-packages](https://github.com/omnided/publish-packages)
+  - [Посилання на репозиторій publish-packages](https://github.com/omnided/skills-publish-packages)
 
 ---
 
@@ -82,6 +82,8 @@ jobs:
           push: true
           tags: ghcr.io/${{ github.repository }}:latest
 ```
+> ##[Скріншот успішного виконання Workflow (зелені галочки)]##
+![](img/изображение_2025-12-30_121755743.png)
 ### 2.3 Перевірка результатів
 Після успішного виконання GitHub Action, Docker-образ з'явився у вкладці Packages профілю.
 ![](img/изображение_2025-12-30_093126562.png)
